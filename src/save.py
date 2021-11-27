@@ -22,7 +22,7 @@ class Saveit:
     def loadGamer(self):                #读取存档
         try:
             with open(r'data\playerData.pkl', 'rb') as loader:
-                stuff=pickle.load(loader)
+                stuff = pickle.load(loader)
         except FileNotFoundError:
             return None
         else:

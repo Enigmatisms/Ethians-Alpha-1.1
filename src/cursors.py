@@ -103,16 +103,7 @@ class Cursors:      #游戏内光标，主要有：
         #应该实现：近距离的开关宝箱，清除陷阱，开关门。
         #func_lst的参数是[dg.sur, npc]
         if not remote:
-            print("Tryed")
             if [self.xat, self.yat] in self.pos_lst and not self.func_lst[0].getChar(self.xat, self.yat):
-                """for i in range(1, self.len_lst):
-                    where=self.func_lst[i].getChar(self.xat, self.yat)
-                    if where in self.func_lst[i].inter_dict:
-                        if i-1:
-                            self.func_lst[i].inter_dict[ where ]()
-                        else:
-                            self.func_lst[i].interDict(self.xat, self.yat, where)         #索引和传参都是where
-                    else: return False"""
                 where = self.func_lst[1].getChar(self.xat, self.yat)
                 if where in self.func_lst[1].inter_dict:
                     self.func_lst[1].interDict(self.xat, self.yat, where)  # 索引和传参都是where
@@ -152,8 +143,8 @@ class Cursors:      #游戏内光标，主要有：
             for x in range(64):
                 value=target.getChar(x, y)
                 if value>=0:
-                    target.image.X=(16-self.posx)*32+80+x*32
-                    target.image.Y=(9-self.posy)*32+10+y*32
+                    target.image.X=((16 - self.posx) << 5) + 80 + (x << 5)
+                    target.image.Y=((9 - self.posy) << 5) + 10 + (y << 5)
                     target.image.frame=value
                     target.image.last_frame=value
                     target.image.update(0)

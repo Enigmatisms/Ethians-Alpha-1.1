@@ -35,8 +35,8 @@ class Player:
             for x in range(0, 64):
                 value=target.getChar(x, y)
                 if value>=0:
-                    target.image.X=(16-self.posx)*32+80+x*32
-                    target.image.Y=(9-self.posy)*32+10+y*32
+                    target.image.X=((16 - self.posx) << 5) + 80 + (x << 5)
+                    target.image.Y=((9 - self.posy) << 5) + 10 + (y << 5)
                     if tag: r=random.randint(0, 1)
                     else: r=0
                     target.image.frame=value+r
@@ -55,7 +55,7 @@ class Player:
         if tag:
             x_adjust=self.posx-cx
             y_adjust=self.posy-cy
-            self.player_img.X, self.player_img.Y =(560+32*x_adjust, 266+32*y_adjust)
+            self.player_img.X, self.player_img.Y =(560 + (x_adjust << 5), 266 + (y_adjust << 5))
 
     def player_trap(self):      #玩家落入落入陷阱，落入陷阱后会到下一层。对应的关卡数+1，但是会落到下一层的随机处，关卡重置。
         self.dg.level_num+=1
@@ -118,7 +118,7 @@ class Player:
                     self.dg.sur.setChar(*point, 36)
                     self.dg.po.more_mob(point, 0, 26, flag=True)
             elif self.dg.sur.getChar(*point)==5:            #钉刺箱子
-                if not random.randint(0, 8):
+                if not random.randint(0, 16):
                     self.dg.sur.setChar(*point, 7)
 
     #移动

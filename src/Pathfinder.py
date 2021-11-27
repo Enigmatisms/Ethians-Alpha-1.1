@@ -2,7 +2,7 @@
 #-*-coding:utf-8-*-
 #Pathfinder
 import sys
-import numpy as np
+from numpy import sqrt
 
 class Point:
     def __init__(self, x, y):
@@ -19,7 +19,7 @@ class Astar:
         self.__found=False
         self.open_set=[]
         self.close_set=[]
-        self.d2=np.sqrt(2)
+        self.d2 = sqrt(2)
         self.start=Point(0, 0)
         self.goal=Point(0, 0)
         self.func_lst=[func_lst]

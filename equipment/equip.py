@@ -6,6 +6,7 @@ import numpy as np
 sys.path.append("..")
 from src.ezplot import MySprite
 from equipment.enchant import *
+from collections import deque
 
 class FloorEquipManage:
     def __init__(self, surface):
@@ -103,8 +104,8 @@ class FloorEquipManage:
             for x in range(4, 60):
                 stuff=self.getChar(x, y)
                 if stuff>=0:
-                    posx=(16-cx)*32+80+x*32
-                    posy=(9-cy)*32+10+y*32
+                    posx=((16-cx) << 5) + 80 + (x << 5)
+                    posy=((9-cy) << 5)+ 10 + (y << 5)
                     image=self.All.getImage(stuff)
                     self.screen.blit(image, (posx, posy))
 
@@ -115,8 +116,8 @@ class FloorEquipManage:
             for y in range(y_min, y_max):
                 stuff=self.getChar(x, y)
                 if stuff>=0 and self.pl.ms.getChar(x, y)==1:       #在光照范围内
-                    posx=(16-cx)*32+80+x*32
-                    posy=(9-cy)*32+10+y*32
+                    posx=((16-cx) << 5) + 80 + (x << 5)
+                    posy=((9-cy) << 5)+ 10 + (y << 5)
                     image = self.All.getImage(stuff)
                     self.screen.blit(image, (posx, posy))
 
@@ -159,27 +160,33 @@ class FloorEquipManage:
     #由于在本游戏中，掉落或者开启宝箱的物品全部出现在地面上，我们将概率问题委托给fem处理
     def mobItemDrop(self, tuple1, trs, lvl):      #给mobs实例使用的
         eq=self.mobDropModule(trs, lvl)
-        if self.canPlace(*tuple1):          #可以原地掉落时，掉落在原地
-            self.dropOne(eq, *tuple1)
-        else:       #原地无法掉落时，在附近八格寻找
-            x, y=tuple1
-            for i in range(x-1, x+2):
-                for j in range(y-1, y+2):
-                    if self.canPlace(i, j):
-                        self.dropOne(eq, i, j)
-                        return
+        x, y = tuple1
+        drop_deque = deque()
+        drop_deque.append((x, y))
+        while len(drop_deque) > 0:                  # BFS
+            i, j = drop_deque.popleft()
+            if self.canPlace(i, j):
+                self.dropOne(eq, i, j)
+                return
+            for m in range(i-1, i+2):
+                for n in range(j-1, j+2):
+                    if m == i and j == n: continue
+                    drop_deque.append((m, n))
 
     def boxItemDrop(self, tuple1, lvl):
         eq=self.boxDropModule(lvl)
-        if self.canPlace(*tuple1):          #可以原地掉落时，掉落在原地
-            self.dropOne(eq, *tuple1)
-        else:       #原地无法掉落时，在附近八格寻找
-            x, y=tuple1
-            for i in range(x-1, x+2):
-                for j in range(y-1, y+2):
-                    if self.canPlace(i, j):                        
-                        self.dropOne(eq, i, j)
-                        return
+        x, y = tuple1
+        drop_deque = deque()
+        drop_deque.append((x, y))
+        while len(drop_deque) > 0:
+            i, j = drop_deque.popleft()
+            if self.canPlace(i, j):
+                self.dropOne(eq, i, j)
+                return
+            for m in range(i-1, i+2):
+                for n in range(j-1, j+2):
+                    if m == i and j == n: continue
+                    drop_deque.append((m, n))
 
     def mobDropModule(self, trs, lvl):
         if trs==-1:       #本怪物没有特征掉落物（比如史莱姆的特征掉落物是钱）
