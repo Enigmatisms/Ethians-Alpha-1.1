@@ -25,7 +25,7 @@ A Rougelike game, in the hope of implement some of my own ideas. About the origi
 - 陷阱，宝箱，怪物，地形丰富
 - FOV shadow casting 迷雾算法，小地图显示
 
-![](README/Screenshot 2021-11-28 033344.png)
+![](README/1.png)
 
 ### 2.2 装备\背包系统
 
@@ -36,9 +36,9 @@ A Rougelike game, in the hope of implement some of my own ideas. About the origi
 - 三个职业：狂战士，游侠，巫师
 - 人物等级系统，商店交易系统，可与NPC进行对话
 
-![](README/Screenshot 2021-11-28 033622.png)
+![](README/3.png)
 
-![](README/Screenshot 2021-11-28 033602.png)
+![](README/2.png)
 
 ### 2.3 主菜单与彩蛋
 
@@ -47,9 +47,9 @@ A Rougelike game, in the hope of implement some of my own ideas. About the origi
 - 支持游戏保存
 - 支持进行键盘设置
 
-![](README/Screenshot 2021-11-28 034341.png)
+![](README/5.png)
 
-![](README/Screenshot 2021-11-28 033804.png)
+![](README/4.png)
 
 ---
 
