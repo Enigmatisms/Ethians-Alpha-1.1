@@ -7,28 +7,28 @@ __date__='2019.2.16'
 
 import sys, os, random, pygame
 from pygame.locals import *
-from house_room import *
-from ply import *
-from mist import *
-from npcs import *
-from ezgui_m import Ezgui
-from head import *
-from diymap import *
-from cursors import *
-from mobs import *
-from blittools import *
-from buttons import Button
-from playerAttr import Pattr
+from src.house_room import *
+from src.ply import *
+from src.mist import *
+from src.npcs import *
+from src.ezgui_m import Ezgui
+from src.head import *
+from src.diymap import *
+from src.cursors import *
+from src.mobs import *
+from src.blittools import *
+from src.buttons import Button
+from src.playerAttr import Pattr
 from loop_module.loop10 import PlayerGui
 from equipment.equip import *
 from equipment.equipfunc import EquipFunction
-from info import *
-from compass import Compass
-from selection2 import Selection
-from save import Saveit
-from quitM import Quitting
+from src.info import *
+from src.compass import Compass
+from src.selection2 import Selection
+from src.save import Saveit
+from src.quitM import Quitting
 from loop_module.loop11 import Monument
-from keysets import keySets
+from src.keysets import keySets
 from loop_module.Startup import Face
 
 pygame.init()

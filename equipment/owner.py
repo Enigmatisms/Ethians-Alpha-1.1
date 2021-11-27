@@ -3,7 +3,6 @@
 
 import sys, random, copy
 sys.path.append("..")
-#from ezplot import MySprite
 
 class Owner:        #商店系统主控函数
     def __init__(self):

@@ -2,7 +2,6 @@
 
 import random
 
-
 class EnchantItem:
     def __init__(self):
         self.ptr=None

@@ -1,7 +1,7 @@
 #-*-coding:utf-8-*-
 import time, sys, json, pygame
 sys.path.append('..')
-from ezplot import MySprite
+from src.ezplot import MySprite
 
 pygame.init()
 screen=pygame.display.set_mode((128,128), 0, 32)

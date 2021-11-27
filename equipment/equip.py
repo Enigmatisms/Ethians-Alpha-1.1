@@ -4,7 +4,7 @@
 import sys, json, copy
 import numpy as np
 sys.path.append("..")
-from ezplot import MySprite
+from src.ezplot import MySprite
 from equipment.enchant import *
 
 class FloorEquipManage:

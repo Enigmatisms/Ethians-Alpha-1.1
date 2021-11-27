@@ -1,6 +1,6 @@
 #-*-coding:utf-8-*-
 import pygame
-from ezplot import MySprite
+from src.ezplot import MySprite
 
 class Monument:
     def __init__(self, surface):

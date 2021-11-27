@@ -3,7 +3,7 @@
 
 import pygame, time, sys, json
 sys.path.append('..')
-from ezplot import MySprite
+from src.ezplot import MySprite
 
 class PlayerGui:
     def __init__(self, surface, ptr):
