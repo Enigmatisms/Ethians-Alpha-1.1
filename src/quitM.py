@@ -12,8 +12,8 @@ class Quitting:
         self.svt=None
         self.ptr=None
         self.slt=None           #只为了设置在mainMenu函数触发时，跳出的界面问题
-        self.quitBk=pygame.image.load(r'asset\quitBk.png').convert_alpha()
-        self.covButton=pygame.image.load(r'asset\covQuit.png').convert_alpha()
+        self.quitBk=pygame.image.load(r'asset/quitBk.png').convert_alpha()
+        self.covButton=pygame.image.load(r'asset/covQuit.png').convert_alpha()
         self.btList=[0,0,0]
         self.rectList=[Rect(260+238*i, 280, 208, 124) for i in range(3)]
         self.funcList=[self.mainMenu, self.resume, self.quitGame]

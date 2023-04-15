@@ -10,7 +10,7 @@ __date__='2019/2/19'
 
 path=os.path.join('asset', 'fonts', 'verdana.ttf')
 
-with open(r'data\prefabs.json', 'r') as r:
+with open(r'data/prefabs.json', 'r') as r:
     DCT = json.load(r)
 
 class Info:
@@ -33,10 +33,10 @@ class Info:
                       1:'Utimated end is reached by this man, who grasps fate with his own hand.',
                       2:'For him, the grand meeting is postponed for the faith he had shown...'}
         self.careerPic=MySprite()
-        self.careerPic.load(r'asset\win.png', 0, 0, 600, 200, 1)
+        self.careerPic.load(r'asset/win.png', 0, 0, 600, 200, 1)
         self.careerPic.X, self.careerPic.Y=0, 410
-        self.deadpic=pygame.image.load(r'asset\epitaph.png').convert_alpha()
-        self.winpic=pygame.image.load(r'asset\winBk.png').convert_alpha()
+        self.deadpic=pygame.image.load(r'asset/epitaph.png').convert_alpha()
+        self.winpic=pygame.image.load(r'asset/winBk.png').convert_alpha()
         self.winList=list()
         self.epiList=list()
         self.surface = pygame.Surface((1200, 650))

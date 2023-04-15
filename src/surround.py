@@ -5,7 +5,7 @@ from src.ezplot import *
 class Surround:                                                                                                                 #建立在Dungeon基础上的类，在Dungeon原有地图上绘制其他地形道具，附加值代号1
     def __init__(self, func):                                                                                      #数据输入函数为func参数，参数对应dg(Dungeon 类)， 数据渲染函数为func2对应函数，为pl(Player 类)
         self.image=MySprite()
-        self.image.load(r'asset\surroundings.png', 0, 0, 32, 32, 11)
+        self.image.load(r'asset/surroundings.png', 0, 0, 32, 32, 11)
         self.func, self.eqf = func, None
         self.level=[[-1 for i in range(42)] for j in range(64)]
         self.no_walk={0, 3, 10, 12, 16, 17, 18, 23, 25, 26, 30, 31, 33, 34, 37, 38, 40, 41, 42}         #不能直接踩在这个图形id对应的图形上

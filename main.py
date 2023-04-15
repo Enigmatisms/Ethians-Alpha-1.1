@@ -45,8 +45,8 @@ screen=pygame.display.set_mode(de_size, 0, 32)
 pygame.display.set_caption('Ethians Alpha 1.0.0')
 path=os.path.join('asset', 'fonts', 'verdana.ttf')
 font=pygame.font.Font(path, 24)
-back=pygame.image.load(r'asset\back.png').convert_alpha()      #这是图形遮盖框
-map_back=pygame.image.load(r'asset\map_back.png').convert_alpha()      #地图编辑器特有图形覆盖框
+back=pygame.image.load(r'asset/back.png').convert_alpha()      #这是图形遮盖框
+map_back=pygame.image.load(r'asset/map_back.png').convert_alpha()      #地图编辑器特有图形覆盖框
 framerate = pygame.time.Clock()         #游戏内时钟
 ks=keySets(screen, hq.set_loop)          #按键设置模块
 ks.loadPreference()         #载入用户按键偏好设置

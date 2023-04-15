@@ -13,7 +13,7 @@ class Saveit:
             self.clrRecord()
         else:
             gamer.eqf, gamer.inf,  gamer.gui=None, None, None   #消除所有的surface
-            with open(r'data\playerData.pkl', 'wb') as saver:
+            with open(r'data/playerData.pkl', 'wb') as saver:
                 pickle.dump(gamer, saver)
             gamer.eqf, gamer.inf, gamer.gui=self.eqf, self.inf, self.gui
             self.inf.prefabTell('saved')
@@ -21,7 +21,7 @@ class Saveit:
 
     def loadGamer(self):                #读取存档
         try:
-            with open(r'data\playerData.pkl', 'rb') as loader:
+            with open(r'data/playerData.pkl', 'rb') as loader:
                 stuff = pickle.load(loader)
         except FileNotFoundError:
             return None
@@ -35,7 +35,7 @@ class Saveit:
 
     def clrRecord(self):
         self.deathJudge=True
-        with open(r'data\playerData.pkl', 'wb') as wri:
+        with open(r'data/playerData.pkl', 'wb') as wri:
             pickle.dump(None, wri)
 
     @staticmethod
@@ -43,24 +43,24 @@ class Saveit:
         key=[time.asctime()]
         key.extend(desc)
         try:
-            with open(r'data\death.json', 'r') as read:
+            with open(r'data/death.json', 'r') as read:
                 dct=json.load(read)
         except FileNotFoundError:
-            with open(r'data\death.json', 'w') as first:
+            with open(r'data/death.json', 'w') as first:
                 json.dump([key], first)
         else:
             dct.append(key)
-            with open(r'data\death.json', 'w') as wri:
+            with open(r'data/death.json', 'w') as wri:
                 json.dump(dct, wri)
 
     @staticmethod
     def loadDeath():            #加载死亡信息
         try:
-            with open(r'data\death.json', 'r') as read:
+            with open(r'data/death.json', 'r') as read:
                 dct = json.load(read)
                 dct = dct[:len(dct) - 40:-1]        #反排列并且限定长度取值
         except FileNotFoundError:
-            with open(r'data\death.json', 'w'):
+            with open(r'data/death.json', 'w'):
                 return None
         else:
             return dct
@@ -70,24 +70,24 @@ class Saveit:
         key = [time.asctime()]
         key.extend(desc)
         try:
-            with open(r'data\heroes.json', 'r') as read:
+            with open(r'data/heroes.json', 'r') as read:
                 dct = json.load(read)
         except FileNotFoundError:
-            with open(r'data\heroes.json', 'w') as first:
+            with open(r'data/heroes.json', 'w') as first:
                 json.dump([key], first)
         else:
             dct.append(key)
-            with open(r'data\heroes.json', 'w') as wri:
+            with open(r'data/heroes.json', 'w') as wri:
                 json.dump(dct, wri)
 
     @staticmethod
     def loadHero():         #TBS
         try:
-            with open(r'data\heroes.json', 'r') as read:
+            with open(r'data/heroes.json', 'r') as read:
                 dct = json.load(read)
                 dct=dct[:len(dct)-34:-1]        #反排列并且限定长度取值
         except FileNotFoundError:
-            with open(r'data\heroes.json', 'w'):
+            with open(r'data/heroes.json', 'w'):
                 return None
         else:
             return dct

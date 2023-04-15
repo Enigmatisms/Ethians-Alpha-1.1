@@ -57,19 +57,19 @@ class Note:
 class Infoimage:
     def __init__(self, surface):            #绘制怪物信息概览的小玩意
         self.screen=surface
-        self.mob_rect=pygame.image.load(r'asset\mob_back.png').convert()
+        self.mob_rect=pygame.image.load(r'asset/mob_back.png').convert()
         self.hp_rect=None
         self.hp_slot=MySprite()
-        self.hp_slot.load(r'asset\hp_slot.png', 0, 0, 72, 500, 3)
-        self.exp_slot=pygame.image.load(r'asset\exp_slot.png').convert_alpha()
+        self.hp_slot.load(r'asset/hp_slot.png', 0, 0, 72, 500, 3)
+        self.exp_slot=pygame.image.load(r'asset/exp_slot.png').convert_alpha()
         self.item=MySprite()
-        self.item.load(r'asset\process1.png', 0, 0, 32, 32, 16)
+        self.item.load(r'asset/process1.png', 0, 0, 32, 32, 16)
         self.item_detail=MySprite()
-        self.item_detail.load(r'equipment\process.png', 0, 0, 128, 128, 16)
+        self.item_detail.load(r'equipment/process.png', 0, 0, 128, 128, 16)
         self.mob_detail=MySprite()
-        self.mob_detail.load(r'asset\mob_demo.png', 0, 0, 128, 128, 10)
+        self.mob_detail.load(r'asset/mob_demo.png', 0, 0, 128, 128, 10)
         self.stats=MySprite()        #状态显示
-        self.stats.load(r'asset\stat.png', 0, 0, 48, 48, 6)
+        self.stats.load(r'asset/stat.png', 0, 0, 48, 48, 6)
         self.ptr=None
         self.po, self.inf=None, None
         self.origin_hp=0
@@ -267,7 +267,7 @@ class Infoimage:
             t=item.name
             text=self.bigf.render(t, True, (0,0,0))
             self.texts.append(text)
-            with open(r'data\mob_desc.json', 'r') as read:
+            with open(r'data/mob_desc.json', 'r') as read:
                 desc=json.load(read)[str(ID)]
             for i in desc:
                 text=self.font3.render(i, True, (0,0,0))

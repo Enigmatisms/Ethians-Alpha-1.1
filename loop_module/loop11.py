@@ -6,15 +6,15 @@ class Monument:
     def __init__(self, surface):
         self.screen=surface
         self.stone=MySprite()
-        self.stone.load(r'asset\stones.png', 0, 0, 600, 650, 2)
+        self.stone.load(r'asset/stones.png', 0, 0, 600, 650, 2)
         self.inf, self.svt, self.hq=None, None, None
         self.mode=0         #0表示墓碑，1表示黄金纪念碑
         self.stone.X, self.stone.Y = 300, 0
         self.deaths=None
         self.heroes=None
         self.loopRecord=1
-        self.font=pygame.font.Font(r'asset\fonts\verdana.ttf', 13)
-        self.font2=pygame.font.Font(r'asset\fonts\verdana.ttf', 18)
+        self.font=pygame.font.Font(r'asset/fonts/verdana.ttf', 13)
+        self.font2=pygame.font.Font(r'asset/fonts/verdana.ttf', 18)
         self.text=[]
         self.text_len=0     #text surface列表的长度
         self.deathMap={(4, 7+3*i):i for i in range(11)}         #死亡信息保存点

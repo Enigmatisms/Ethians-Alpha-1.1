@@ -59,7 +59,7 @@ class Pool:
                      195:self.tpWand, 196:self.mapWand, 197:self.skullWand}          #怪物不良状态
         self.melee={1:self.fieryWand, 2:self.bloodDrain, 3:self.dizzyM, 4:self.knockBack, 5:self.chaosWand,
                     6:self.frozenWand, 7:self.poisonHit, 8:self.armorBreak, 9:self.penetrate, 10:self.sweap}
-        with open(r'data\mob_dir.json', 'r') as dic:
+        with open(r'data/mob_dir.json', 'r') as dic:
             self.md=json.load(dic)
         self.fem=None
         self.summon_dict={22:26, 40:14}
@@ -108,7 +108,7 @@ class Pool:
         num=str(n)          #注意n不是表数量，而是表ID
         '''===========图片获取============='''
         mob=self.mob(self.screen)
-        mob.load(r'asset\mobs.png', 0, 0, 32, 32, 10)
+        mob.load(r'asset/mobs.png', 0, 0, 32, 32, 10)
         '''===========参数传入============'''
         mob.setup_mob(*self.md[num])
         '''=========地图位置============='''

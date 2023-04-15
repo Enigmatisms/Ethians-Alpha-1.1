@@ -8,31 +8,31 @@ from src.ezplot import MySprite
 class PlayerGui:
     def __init__(self, surface, ptr):
         self.screen=surface
-        self.font1=pygame.font.Font(r'asset\fonts\verdana.ttf', 20)
-        self.font2=pygame.font.Font(r'asset\fonts\verdana.ttf', 15)
+        self.font1=pygame.font.Font(r'asset/fonts/verdana.ttf', 20)
+        self.font2=pygame.font.Font(r'asset/fonts/verdana.ttf', 15)
         self.mob=MySprite()
-        self.mob.load(r'asset\mobs.png', 0, 0, 32, 32, 10)
+        self.mob.load(r'asset/mobs.png', 0, 0, 32, 32, 10)
         self.mob_name={}
         """============按钮有关属性============="""
         self.btn=MySprite()
-        self.btn.load(r'asset\buttons_2.png', 0, 0, 96, 50, 1)
+        self.btn.load(r'asset/buttons_2.png', 0, 0, 96, 50, 1)
         self.btn.X, self.btn.Y=1000, 80
         self.button_word=[self.font1.render('Kills', True, (0,0,0)), self.font1.render('Back', True, (0,0,0))]
         self.rect=pygame.Rect((1000, 80, 96, 50))
         #====================================
         self.header=self.font1.render("Statistics for monsters killed", True, (0,0,0))
         self.player=MySprite()
-        self.player.load(r'asset\player.png', 0, 0, 104, 104, 3)
+        self.player.load(r'asset/player.png', 0, 0, 104, 104, 3)
         self.item=MySprite()
-        self.item.load(r'asset\items.png', 0, 0, 64, 64, 6)
+        self.item.load(r'asset/items.png', 0, 0, 64, 64, 6)
         self.bg_slot=[]
         self.equips=MySprite()
-        self.equips.load(r'asset\process.png', 0, 0, 64, 64, 16)
-        d=pygame.image.load(r'asset\warrior.png').convert()
+        self.equips.load(r'asset/process.png', 0, 0, 64, 64, 16)
+        d=pygame.image.load(r'asset/warrior.png').convert()
         self.bg_slot.append(d)
-        d=pygame.image.load(r'asset\ranger.png').convert()
+        d=pygame.image.load(r'asset/ranger.png').convert()
         self.bg_slot.append(d)
-        d=pygame.image.load(r'asset\wizard.png').convert()
+        d=pygame.image.load(r'asset/wizard.png').convert()
         self.bg_slot.append(d)
         self.ptr=ptr
         self.player_num=self.ptr.career_getter()
