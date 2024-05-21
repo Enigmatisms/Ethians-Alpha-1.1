@@ -140,7 +140,7 @@ class Dungeon:    #地牢对象创建
                     self.sur.reset()
                     self.npc.reset()
                     self.level = np.array(tem[n][0], dtype = int)
-                    self.sur.level = tem[n][1]
+                    self.sur.level = np.array(tem[n][1], dtype = int)
                     self.level_num = -1
                     return
                 print('You have %s map in storage.'%len(tem))
@@ -155,7 +155,7 @@ class Dungeon:    #地牢对象创建
                         self.sur.reset()
                         self.npc.reset()
                         self.level = np.array(tem[ num-1 ][ 0 ], dtype = int)
-                        self.sur.level=tem[ num-1 ][1]
+                        self.sur.level= np.array(tem[ num-1 ][1], dtype = int)
                         self.level_num=-1
             else:
                 print('You have no map to test! Go and create one!')
@@ -174,7 +174,7 @@ class Dungeon:    #地牢对象创建
             if num>0:
                 self.sur.reset()
                 self.level = np.array(tem[num][0], dtype = int)
-                self.sur.level = tem[num][1]
+                self.sur.level = np.array(tem[num][1], dtype = int)
                 self.stairs(1) if lvl else self.stairs()
                 if num == 9:
                     self.sur.treasure_box(11, 14)  # 重门迷宫需要更多宝箱

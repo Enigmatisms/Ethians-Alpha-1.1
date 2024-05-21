@@ -120,16 +120,25 @@ class Info:
         length=len(self.textList)
         self.textMod = min(length, self.textMod)
         if self.textMod:
-            for i in range(length-self.textMod, length):
+            for i in range(length-self.textMod, length - 1):
                 tem=self.font.render(self.textList[i], True, (0,0,0))
-                self.drawList.append(tem)
+                self.drawList.append([tem, self.textList[i], False])
+            self.font.set_bold(True)
+            self.drawList.append([self.font.render(self.textList[-1], True, (0,0,0)), self.textList[-1], True])
+            self.font.set_bold(False)
             self.textMod=0
 
     #打印信息
     def drawText(self, x, y):
         length=len(self.drawList)
-        for i in range(length):
-            self.screen.blit(self.drawList[i], (x, y-26*(length-i-1)))
+        for i in range(length - 1):
+            if self.drawList[i][2]:
+                image = self.font.render(self.drawList[i][1], True, (0,0,0))
+                self.drawList[i][0] = image
+                self.drawList[i][2] = False
+            self.screen.blit(self.drawList[i][0], (x, y-26*(length-i-1)))
+        if self.drawList:
+            self.screen.blit(self.drawList[-1][0], (x, y))
 
     def deathCause(self, tag, name='the Curse of Enigma'):
         if tag=='poison': self.death='The toxic substances in your body cost your life.'

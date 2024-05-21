@@ -411,6 +411,7 @@ while True:
                         gui.drawBigButton(400, 80, 54, 8, 8, gui.item_list)
                     else:
                         gui.drawBigButton(100, 140, 54, 16, 8, gui.item_list)
+                    gui.draw_gold(100, 572, pl.ptr.getMoney())
                     gui.drawPic()
                     gui.drawInfo()
                     gui.pageDisplay(880, 520)

@@ -294,7 +294,7 @@ class Monster(MySprite):        #继承了父类MySprite
                     self.inf.prefabTell('blind')
                     if not self.ptr.blind:          #没瞎才能让玩家瞎
                         self.ptr.blind=True     #失明判断（防止重复减小玩家视野）
-                        self.ptr.LR-=1
+                        self.ptr.LR-=4
                 elif tag==4:
                     self.ptr.setStat(2, 4-self.ptr.fireR)             #燃烧
                     if 4 - self.ptr.fireR: self.inf.prefabTell('fire')

@@ -13,7 +13,7 @@ class FloorEquipManage:
     def __init__(self, surface):
         self.All = MySprite()
         self.All.load(os.path.join("asset", "process1.png"), 0, 0, 32, 32, 16)
-        self.level=[[-1 for i in range(42)] for j in range(64)]
+        self.level=np.full((64, 42), -1, dtype = int)
         self.pool={}
         self.ptr=None       #传入ptr,需要和人物的背包联系
         self.dg=None
@@ -34,14 +34,14 @@ class FloorEquipManage:
             self.gnrt_dct={int(k):v[8] for k,v in tem.items()}         #生成一个字典,内容是key为物品ID, value为物品生成等级
 
     def reset(self):
-        self.level=[[-1 for i in range(42)] for j in range(64)]
+        self.level=np.full((64, 42), -1, dtype = int)
         self.pool = {}
 
     def setChar(self, x, y, val):
-        self.level[x][y]=val
+        self.level[x, y]=val
 
     def getChar(self, x, y):
-        return self.level[x][y]
+        return self.level[x, y]
 
     def getEquip(self, x, y):           #self.pool建立的是掉落在地上的武器的位置（key）与武器类实例（value）的映射
         judge=self.getChar(x, y)
@@ -143,7 +143,7 @@ class FloorEquipManage:
             self.setChar(x, y, eq.ID)
     
     def floorReset(self):
-        self.level=[[-1 for i in range(42)] for j in range(64)]
+        self.level=np.full((64, 42), -1, dtype = int)
         self.pool={}
             
     def canPlace(self, x, y):

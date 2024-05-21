@@ -131,7 +131,7 @@ class Cursors:      #游戏内光标，主要有：
 
     @staticmethod
     def setChar(target, x, y, value):
-        target.level[x][y]=value
+        target.level[x, y]=value
 
     def show_info(self, x, y):
         #把information展示在屏幕的(x,y)点处

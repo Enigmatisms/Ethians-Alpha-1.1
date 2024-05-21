@@ -20,7 +20,7 @@ class Pattr:
         self.__score=0
         self.__career=-1
         self.__task=None
-        self.LR=4       #光照范围
+        self.LR=6       #光照范围
         self.blind=False
         self.frozen=False
         self.bleeding = False
@@ -52,13 +52,14 @@ class Pattr:
             self.carring_adder(stuff.weight)
             for k in self.__bag:
                 if stuff.name==k.name and stuff.tag!='Arrow':
-                    k.count+=stuff.count
-                    return True
+                    k.count += stuff.count
+                    break
                 elif stuff.name==k.name and stuff.tag=='Arrow':       #弓箭在数量上不堆叠，能量堆叠
-                    k.energy+=stuff.energy
-                    return True
+                    k.energy += stuff.energy
+                    break
+            else:
+                self.__bag.append(stuff)        #背包里没有就添加
             self.inf.prefabTell('pickup', back=self.inf.measure(stuff.count, stuff.tag, stuff.name))
-            self.__bag.append(stuff)        #背包里没有就添加
             return True
         else:
             self.inf.prefabTell('ovrw')
@@ -360,6 +361,7 @@ class Pattr:
             self.weight_setter(39)
             self.lv_adder()
             self.__career_setter(2)
+            self.LR+=1
             self.eqf.bagSetUp(2, self.__bag)
         elif career == 1:       #游侠！
             self.hp_setter(18)
@@ -371,7 +373,7 @@ class Pattr:
             self.weight_setter(41)
             self.lv_adder()
             self.__career_setter(1)
-            self.LR+=1
+            self.LR+=2
             self.eqf.bagSetUp(1, self.__bag)
         else:
             raise ValueError('Career number out of range(3).')
@@ -562,7 +564,7 @@ class Pattr:
             self.__stat[3]-=1
         elif self.__stat[3]==1:
             self.__stat[3] -= 1
-            self.LR+=1
+            self.LR += 4
             self.blind=False
         return 0
 
@@ -694,7 +696,7 @@ class Pattr:
         self.__score = 0
         self.__career = -1
         self.__task = None
-        self.LR = 4  # 光照范围
+        self.LR = 6  # 光照范围
         self.blind = False
         self.frozen = False
         self.bleeding = False

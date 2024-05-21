@@ -192,6 +192,11 @@ class Ezgui:
             self.item.update(0)
             self.item.draw(self.screen)
 
+    def draw_gold(self, x, y, current_gold):
+        self.font.set_bold(True)
+        self.screen.blit(self.font.render(f"You have: {current_gold} g", True, (0, 0, 0)), (x, y))
+        self.font.set_bold(False)
+
     def drawSmallButton(self, tag=4, tag2=False):
         if not tag:         #传入的tag参数，在loop3中为self.current_npc
             if tag2:        #tag2是detail_judge
