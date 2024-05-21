@@ -6,6 +6,7 @@ import os
 __author__='SEeHz3'
 __date__='2019.2.17'
 
+import numpy as np
 import json, random
 from src.Pathfinder import Astar
 from src.ezplot import *
@@ -22,7 +23,7 @@ class Dungeon:    #地牢对象创建
         self.u_x, self.u_y, self.d_x, self.d_y=(0,0,0,0)
         self.image=MySprite()
         self.image.load(os.path.join("asset", "floor2.png"), 0, 0, 32, 32, 11)
-        self.level=[[0 for i in range(42)] for j in range(64)]
+        self.level=np.zeros((64, 42), dtype = int)
         self.lvl0=Level0()
         self.rooms=list()
         self.water=MySprite()
@@ -44,11 +45,11 @@ class Dungeon:    #地牢对象创建
 
     def getChar(self, x, y):        #获取一个地图方块的id
         if all([x>=0 ,x<64, y>=0, y<42]):
-            return self.level[x][y]
+            return self.level[x, y]
         return -1
 
     def setChar(self, x, y, val):      #设置地图id为char值
-        self.level[x][y]=val
+        self.level[x, y]=val
 
     def getCost(self, x, y):            #寻路代价计算方法
         k=self.getChar(x, y)
@@ -133,12 +134,12 @@ class Dungeon:    #地牢对象创建
             with open(os.path.join('data', 'diy.json'), 'w') as setting:
                 json.dump([], setting)
         else:
-            self.level=[[0 for i in range(42)] for j in range(64)]
+            self.level=np.zeros((64, 42), dtype = int)
             if tem:
                 if not n is None:       #载入特定关卡
                     self.sur.reset()
                     self.npc.reset()
-                    self.level = tem[n][0]
+                    self.level = np.array(tem[n][0], dtype = int)
                     self.sur.level = tem[n][1]
                     self.level_num = -1
                     return
@@ -153,7 +154,7 @@ class Dungeon:    #地牢对象创建
                         #加载对应地图数据
                         self.sur.reset()
                         self.npc.reset()
-                        self.level=tem[ num-1 ][ 0 ]
+                        self.level = np.array(tem[ num-1 ][ 0 ], dtype = int)
                         self.sur.level=tem[ num-1 ][1]
                         self.level_num=-1
             else:
@@ -172,7 +173,7 @@ class Dungeon:    #地牢对象创建
             else: num=self.po.ptr.dungeon[self.level_num-3]
             if num>0:
                 self.sur.reset()
-                self.level = tem[num][0]
+                self.level = np.array(tem[num][0], dtype = int)
                 self.sur.level = tem[num][1]
                 self.stairs(1) if lvl else self.stairs()
                 if num == 9:
@@ -188,7 +189,7 @@ class Dungeon:    #地牢对象创建
             #和场景有关，自定义生成箱子，陷阱，楼梯：
     
     def reset(self):        #SPACE reset地图设置
-        self.level=[[0 for i in range(42)] for j in range(64)]
+        self.level=np.zeros((64, 42), dtype = int)
         self.rooms=list()
         self.sur.reset()
         self.npc.reset()
@@ -236,7 +237,7 @@ class Dungeon:    #地牢对象创建
             self.modCave()
 
     def setCave(self, times=4):
-        self.level = [[27 for i in range(42)] for j in range(64)]
+        self.level = np.full((64, 42), 27, dtype = int)
         for x in range(4, 61):
             for y in range(4, 38):
                 self.setChar(x, y, random.choices([31, 32, 27, 28], [0.48, 0.16, 0.30, 0.06])[0])

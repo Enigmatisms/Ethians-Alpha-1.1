@@ -23,7 +23,6 @@ class Pool:
         self.ptr=None
         self.itemDrop=None      #需要从外界传入的函数（fem）
         self.ms=func3               #除雾mist实例
-        #self.level=[[-1 for i in range(42)] for j in range(64)]
         self.no_walk=range(1,64)
         #0-7是史莱姆，8是阴沟鼠，10是大鼠，12是骷髅， 14是蝙蝠， 16是哥布林，18是蜘蛛
         self.dict0={range(7): 10}
@@ -520,7 +519,6 @@ class Pool:
 
     def reset(self):
         self.mob_pool = {}
-        #self.level = [[-1 for i in range(42)] for j in range(64)]
     """=================静态方法=================="""
     @staticmethod
     def rectRange(posx, posy, n):           #获取方形区域内点

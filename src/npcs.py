@@ -9,7 +9,6 @@ class NPC:      #NPC环境
         self.image=MySprite()
         self.dg=func
         self.image.load(os.path.join("asset", "npcs.png"), 0, 0, 32, 32, 8)
-        #self.level=[[-1 for i in range(42)] for j in range(64)]
         self.no_stand={0, 4, 7, 8, 9, 10, 30}
         #self.no_walk={2*i for i in range(10)}
         self.no_walk={1}
@@ -124,7 +123,6 @@ class NPC:      #NPC环境
         return self.npc_pos[(x, y)]
 
     def reset(self):
-        #self.level=[[-1 for i in range(42)] for j in range(64)]
         self.npc_pos.clear()
         self.gui.m_judge, self.gui.p_judge=False, False         #gui中执行的任务更多
 

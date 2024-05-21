@@ -1,16 +1,17 @@
 #-*-coding:utf-8-*-
 
 import random
+import numpy as np
 
 class Level0:
     def __init__(self):
-        self.level=[[0 for i in range(42)] for j in range(64)]
+        self.level=np.zeros((64, 42), dtype = int)
 
     def getChar(self, x, y):
-        return self.level[x][y]
+        return self.level[x, y]
 
     def setChar(self, x, y, val):
-        self.level[x][y]=val
+        self.level[x, y]=val
     
     def __getVinc(self, x, y, radius=1):
         lst = list()
@@ -107,9 +108,9 @@ class Level0:
             else: break
 
     def setUpMap(self, times=4):
-        for x in range(4, 60):
-            for y in range(4, 38):
-                self.setChar(x, y, random.choices([0, 5], [0.24, 0.76])[0])
+        random_values = np.random.choice([0, 5], size=(56, 34), p=[0.24, 0.76])
+        # 将生成的随机数组赋值到原始数组的指定区域
+        self.level[4:60, 4:38] = random_values
         self.mapGen(times)
         self.lakeGen(2)
         self.randomRoad()

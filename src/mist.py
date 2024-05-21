@@ -1,6 +1,6 @@
-import os
 #-*-coding:utf-8-*-
-
+import os
+import numpy as np
 from src.ezplot import MySprite
 
 #定向除雾系统
@@ -10,7 +10,7 @@ class Mist:
         self.image=MySprite()
         self.image.load(os.path.join("asset", "mist.png"), 0, 0, 32, 32, 3)
         self.dg=func
-        self.level=[[0 for i in range(42)] for j in range(64)]     #0代表未勘探（黑色浓雾，不透明），1代表正在勘探（全透明），2代表勘探过但是不在勘探（半透明，不显示生物（这怎么写？））
+        self.level=np.zeros((64, 42), dtype = int)     #0代表未勘探（黑色浓雾，不透明），1代表正在勘探（全透明），2代表勘探过但是不在勘探（半透明，不显示生物（这怎么写？））
         self.open_set, self.close_set = [], []
         self.dgMist={0, 10, 15, 22, 27, 28}
         self.surMist={0, 12, 25, 26, 38, 39}
@@ -33,11 +33,11 @@ class Mist:
 
     def getChar(self, x, y):        #获取一个地图方块的id
         if all([x >= 0, x < 64, y >= 0, y < 42]):
-            return self.level[x][y]
+            return self.level[x, y]
         return -1
 
     def setChar(self, x, y, val=1):         #无val参数则是clearMist
-        self.level[x][y]=val
+        self.level[x, y]=val
 
     def isOpaque(self, x, y, tag=False):        #是否是不透明方块？
         return self.dg.getChar(x, y) in self.dgMist or self.dg.sur.getChar(x, y) in self.surMist or (tag and self.dg.po.getChar(x, y) >=0)
@@ -102,5 +102,5 @@ class Mist:
         return self.lst
 
     def reset_mist(self):
-        self.level=[[0 for i in range(42)] for j in range(64)]
+        self.level=np.zeros((64, 42), dtype = int)
         

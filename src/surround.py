@@ -1,6 +1,7 @@
 import os
 #-*-coding:utf-8-*-
 import random
+import numpy as np
 from src.ezplot import *
 
 class Surround:                                                                                                                 #建立在Dungeon基础上的类，在Dungeon原有地图上绘制其他地形道具，附加值代号1
@@ -8,7 +9,7 @@ class Surround:                                                                 
         self.image=MySprite()
         self.image.load(os.path.join("asset", "surroundings.png"), 0, 0, 32, 32, 11)
         self.func, self.eqf = func, None
-        self.level=[[-1 for i in range(42)] for j in range(64)]
+        self.level=np.full((64, 42), -1, dtype = int)
         self.no_walk={0, 3, 10, 12, 16, 17, 18, 23, 25, 26, 30, 31, 33, 34, 37, 38, 40, 41, 42}         #不能直接踩在这个图形id对应的图形上
         self.nowalk_through={16, 17, 18, 23, 25, 26, 30, 31, 33, 34, 37, 38, 40, 41, 42}               #这个对应了No_walk,pathfinder不能通过的
         self.doors=[0, 3]                                                                                                         #不能直接踩在这个图形id对应的图形上，在踩之前会改变id的图形
@@ -109,10 +110,10 @@ class Surround:                                                                 
     #=======================Char的修改==========================
     def getChar(self, x, y):  # 获取一个地图方块的id
         # if x>=0 and x<64 and y>=0 and y<42:
-        return self.level[x][y]
+        return self.level[x, y]
 
     def setChar(self, x, y, val):      #设置地图id为char值
-        self.level[x][y]=val
+        self.level[x, y]=val
 
     def modChar(self, x, y):        #修改Char值，这个修改是不赋值的
         #就是开门的作用
@@ -134,7 +135,7 @@ class Surround:                                                                 
         return False
         
     def reset(self):
-        self.level=[[-1 for i in range(42)] for j in range(64)]
+        self.level=np.full((64, 42), -1, dtype = int)
 
     #===================环境交互===============================
     '''======================================================='''

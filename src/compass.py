@@ -1,5 +1,6 @@
 import os
 import pygame
+import numpy as np
 
 class Compass:
     def __init__(self, surface, func_list):
@@ -8,7 +9,7 @@ class Compass:
         self.npc=func_list[1]
         self.ms=func_list[2]
         self.pl=func_list[3]
-        self.level=[[0 for i in range(42)] for j in range(64)]
+        self.level=np.full((64, 42), 0, dtype = int)
         self.color={'mist':(0,0,0), 'bk':(255, 255, 255), 'wall1':(100, 100, 100),
                     'floor1':(190, 190, 190), 'box':(225, 185, 0), 'grass':(124, 252, 0),
                     'tree':(0,128, 0), 'swamp':(50, 205, 50), 'water':(30, 144, 255),
@@ -42,10 +43,10 @@ class Compass:
         else: return 'floor1'
 
     def getChar(self, x, y):
-        return self.level[x][y]
+        return self.level[x, y]
 
     def setChar(self, x, y, val):
-        self.level[x][y]=val
+        self.level[x, y]=val
 
     def getMap(self):
         for x in range(0, 64):
