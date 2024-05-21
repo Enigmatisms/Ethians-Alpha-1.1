@@ -1,3 +1,4 @@
+import os
 #-*-coding:utf-8-*-
 #!/usr/bin/env python3
 import pygame, time
@@ -10,15 +11,15 @@ class Selection:
         self.hq=None
         self.ptr=None
         self.svt=None   #saveit模块
-        self.skillBk=pygame.image.load(r'asset\skills.png').convert()
-        self.careerBk=pygame.image.load(r'asset\career.png').convert()
-        self.menuBk=pygame.image.load(r'asset\menu.png').convert()
+        self.skillBk=pygame.image.load(os.path.join("asset", "skills.png")).convert()
+        self.careerBk=pygame.image.load(os.path.join("asset", "career.png")).convert()
+        self.menuBk=pygame.image.load(os.path.join("asset", "menu.png")).convert()
         self.covSkill=MySprite()
         self.covCareer=MySprite()
         self.covMenu=MySprite()
-        self.covSkill.load(r'asset\mantle.png', 0, 0, 204, 590, 3)
-        self.covCareer.load(r'asset\mantle2.png', 0, 0, 344, 566, 3)
-        self.covMenu.load(r'asset\mantle3.png', 0, 0, 204, 490, 5)
+        self.covSkill.load(os.path.join("asset", "mantle.png"), 0, 0, 204, 590, 3)
+        self.covCareer.load(os.path.join("asset", "mantle2.png"), 0, 0, 344, 566, 3)
+        self.covMenu.load(os.path.join("asset", "mantle3.png"), 0, 0, 204, 490, 5)
         self.covSkill.Y, self.covCareer.Y = 30, 42
         self.mantle=None
         self.bk=None

@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 #-*-coding:utf-8-*-
 
@@ -10,7 +11,7 @@ class Button:
             return 0
         self.screen=surface
         self.image=MySprite()
-        self.image.load(r'asset\buttons.png', 0, 0, 48, 48, 6)
+        self.image.load(os.path.join("asset", "buttons.png"), 0, 0, 48, 48, 6)
         self.button_lst=[]
         for i in range(11):
             self.button_lst.append(pygame.Rect(140+i*80, 450, 48, 48))

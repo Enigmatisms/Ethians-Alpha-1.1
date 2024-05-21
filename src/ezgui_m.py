@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 #-*-coding:utf-8-*-
 
@@ -11,21 +12,21 @@ class Ezgui:
     def __init__(self, surface):
         self.screen=surface
         self.item=MySprite()
-        self.item.load(r'asset\column.png', 0, 0, 400, 46, 1)
+        self.item.load(os.path.join("asset", "column.png"), 0, 0, 400, 46, 1)
         self.button=MySprite()
-        self.button.load(r'asset\buttons_2.png', 0, 0, 96, 50, 1)
+        self.button.load(os.path.join("asset", "buttons_2.png"), 0, 0, 96, 50, 1)
         self.header=MySprite()
-        self.header.load(r'asset\header.png', 42, 36, 320, 106, 1)
-        self.talk_gui=pygame.image.load(r'asset\conversation.png').convert_alpha()
-        self.shop_gui=pygame.image.load(r'asset\shop.png').convert()
+        self.header.load(os.path.join("asset", "header.png"), 42, 36, 320, 106, 1)
+        self.talk_gui=pygame.image.load(os.path.join("asset", "conversation.png")).convert_alpha()
+        self.shop_gui=pygame.image.load(os.path.join("asset", "shop.png")).convert()
         self.words=([' Buy         Sell          Chat', ' Buy         Task       Chat', 'Hire        Chat         Quit',
                      ' <<<         >>>        Quit', 'Take         Inquire       Quit', 'Buy One    Buy All      Back',
                      'Equip      Dump1    DumpAll     Back', 'Strip       Dump1    DumpAll     Back', '  Sell1       SellAll       Back',
                      'Use        Dump1    DumpAll     Back', 'Chat', ' '])
         self.stuff=MySprite()
-        self.stuff.load(r'asset\process1.png', 0, 0, 32, 32, 16)
+        self.stuff.load(os.path.join("asset", "process1.png"), 0, 0, 32, 32, 16)
         self.detail=MySprite()
-        self.detail.load(r'equipment\process.png', 0, 0, 128, 128, 16)
+        self.detail.load(os.path.join("equipment", "process.png"), 0, 0, 128, 128, 16)
         self.item_list=[]
         self.button_list=[]         #小按钮的rect列表
         self.btcover_list=[]        #按键的图案帧数信息表
@@ -33,9 +34,9 @@ class Ezgui:
         self.func_list1, self.func_list2=[],[]
         self.text_list, self.text=[], []        #与npc对话时:text_list是pygame 文字图像实例集合，text是实际显示的实例
         self.quit=False
-        with open(r'data\npc_talks.txt', 'r') as read:
+        with open(os.path.join("data", "npc_talks.txt")) as read:
             self.texts=json.load(read)
-        with open(r'data\chat_talks.txt', 'r') as read:
+        with open(os.path.join("data", "chat_talks.txt")) as read:
             self.chats=json.load(read)
         path=os.path.join('asset', 'fonts', 'verdana.ttf')
         self.font=pygame.font.Font(path, 21)

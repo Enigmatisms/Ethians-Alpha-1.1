@@ -1,3 +1,4 @@
+import os
 #-*-coding: utf-8-*-
 
 import pygame, json, os, copy
@@ -12,9 +13,9 @@ class keySets:
         self.wind = MySprite()       #wrong_indicator
         self.screen=surface
         self.loopSetter=func
-        self.bk=pygame.image.load(r'asset\settings.png').convert_alpha()
-        self.ind.load(r'asset\indicator.png', 0, 0, 48, 48, 8)
-        self.wind.load(r'asset\windicator.png', 0, 0, 48, 48, 8)
+        self.bk=pygame.image.load(os.path.join("asset", "settings.png")).convert_alpha()
+        self.ind.load(os.path.join("asset", "indicator.png"), 0, 0, 48, 48, 8)
+        self.wind.load(os.path.join("asset", "windicator.png"), 0, 0, 48, 48, 8)
         self.ind.X = 550  # 初始位置设定
         self.ind.Y = 100  # 初始位置设定
         self.default={'up':K_UP, 'down':K_DOWN, 'lf':K_LEFT, 'rt':K_RIGHT,
@@ -53,15 +54,15 @@ class keySets:
 
     def loadPreference(self):       #加载玩家设置偏好
         try:
-            with open(r'data\keyshortcuts.json', 'r') as rd:
+            with open(os.path.join("data", "keyshortcuts.json"), 'r') as rd:
                 self.keyPads=json.load(rd)
         except FileNotFoundError:
             self.keyPads = copy.copy(self.default)
-            with open(r'data\keyshortcuts.json', 'w') as first:
+            with open(os.path.join("data", "keyshortcuts.json"), 'w') as first:
                 json.dump(self.keyPads, first)
 
     def savePreference(self):       #保存玩家设置偏好
-        with open(r'data\keyshortcuts.json', 'w') as first:
+        with open(os.path.join("data", "keyshortcuts.json"), 'w') as first:
             json.dump(self.keyPads, first)
         self.loopSetter(4)      #保存后就退出
 

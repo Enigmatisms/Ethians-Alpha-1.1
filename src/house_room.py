@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 #-*-coding:utf-8-*-
 #This is the main loop of Ethians
@@ -20,7 +21,7 @@ class Dungeon:    #地牢对象创建
         self.screen=screen
         self.u_x, self.u_y, self.d_x, self.d_y=(0,0,0,0)
         self.image=MySprite()
-        self.image.load(r'asset\floor2.png', 0, 0, 32, 32, 11)
+        self.image.load(os.path.join("asset", "floor2.png"), 0, 0, 32, 32, 11)
         self.level=[[0 for i in range(42)] for j in range(64)]
         self.lvl0=Level0()
         self.rooms=list()
@@ -126,10 +127,10 @@ class Dungeon:    #地牢对象创建
     def load_level(self, n=None):           #从DIY地图中取出数据加载~！！
         #由于是测试，所以暂且设置level_num=-1（-1层的自定义关卡，只有开发者可以进入）
         try:
-            with open('data\diy.json', 'r') as read:
+            with open(os.path.join('data', 'diy.json'), 'r') as read:
                 tem=json.load(read)
         except FileNotFoundError:
-            with open('data\diy.json', 'w') as setting:
+            with open(os.path.join('data', 'diy.json'), 'w') as setting:
                 json.dump([], setting)
         else:
             self.level=[[0 for i in range(42)] for j in range(64)]
@@ -161,10 +162,10 @@ class Dungeon:    #地牢对象创建
     def load_diy(self, lvl=0):
         #随机载入自定义地图
         try:
-            with open('data\diy.json', 'r') as read:
+            with open(os.path.join('data', 'diy.json'), 'r') as read:
                 tem=json.load(read)
         except FileNotFoundError:
-            with open('data\diy.json', 'w') as setting:
+            with open(os.path.join('data', 'diy.json'), 'w') as setting:
                 json.dump([], setting)
         else:
             if lvl: num=lvl

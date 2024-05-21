@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 #-*-coding:utf-8-*-
 
@@ -18,13 +19,13 @@ class DIY:      #地图编辑器模块，开发者可以自己画地图，对应
         self.font, self.font2=font, font2
         MySprite.__init__(self)
         self.house=MySprite()
-        self.house.load(r'asset\floor2.png',0,0,32,32,11)
+        self.house.load(os.path.join("asset", "floor2.png"),0,0,32,32,11)
         self.sur=MySprite()
         self.posx,self.posy=(32, 22)
-        self.c1,self.c2=pygame.image.load(r'asset\cursor.png').convert_alpha(), pygame.image.load('asset\cursor2.png').convert_alpha()
+        self.c1,self.c2=pygame.image.load(os.path.join("asset", "cursor.png")).convert_alpha(), pygame.image.load(os.path.join("asset", "cursor2.png")).convert_alpha()
         self.cursors_list=[self.c1, self.c2]
         self.cursors=self.c2           #cursor是地图编辑器里的光标，初始显示绿色光标，表示地砖编辑模式，红色表示环境物品（地图道具）编辑模式
-        self.sur.load(r'asset\surroundings.png', 0, 0, 32, 32, 11)
+        self.sur.load(os.path.join("asset", "surroundings.png"), 0, 0, 32, 32, 11)
         self.house_level=[[0 for i in range(42)] for j in range(64)]
         self.sur_level=[[-1 for i in range(42)] for j in range(64)]
         self.house_set=True        #按TAB可以切换环境设置以及房间地面设置，house_set为真时设置房间地面，反之设置环境
@@ -159,7 +160,7 @@ class DIY:      #地图编辑器模块，开发者可以自己画地图，对应
     def key_8(self):        #读取以前的地图设置，编辑已经保存的地图
         #这对于地图修改非常必要
         try:
-            with open('data\diy.json', 'r') as read:
+            with open(os.path.join('data', 'diy.json'), 'r') as read:
                 tem=json.load(read)
         except FileNotFoundError:
                 self.saver_read=False
@@ -183,7 +184,7 @@ class DIY:      #地图编辑器模块，开发者可以自己画地图，对应
     
     def key_9(self):        #删除某些已经保存的地图
         try:
-            with open('data\diy.json', 'r') as read:
+            with open(os.path.join('data', 'diy.json'), 'r') as read:
                 tem=json.load(read)
         except FileNotFoundError:
                 self.saver_del=False
@@ -212,19 +213,19 @@ class DIY:      #地图编辑器模块，开发者可以自己画地图，对应
         #保存按钮：按下之后会输出self.house_level和self.sur_level
         def dump(file):
             try:
-                with open('data\diy.json', 'r') as read:
+                with open(os.path.join('data', 'diy.json'), 'r') as read:
                     tem=json.load(read)
                     tem.append(file)
-                with open('data\diy.json', 'w') as fir:
+                with open(os.path.join('data', 'diy.json'), 'w') as fir:
                     json.dump(tem, fir)
             except FileNotFoundError:
-                with open('data\diy.json', 'w') as fir:
+                with open(os.path.join('data', 'diy.json'), 'w') as fir:
                     json.dump([], fir)
                     print('Catalog "diy.json" is created successfully!')
-                with open('data\diy.json', 'r') as read:
+                with open(os.path.join('data', 'diy.json'), 'r') as read:
                     tem=json.load(read)
                     tem.append(file)
-                with open('data\diy.json', 'w') as fir:
+                with open(os.path.join('data', 'diy.json'), 'w') as fir:
                     json.dump(tem, fir)
             print('File saved successfully!')
         dump([self.house_level, self.sur_level])

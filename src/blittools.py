@@ -57,19 +57,19 @@ class Note:
 class Infoimage:
     def __init__(self, surface):            #绘制怪物信息概览的小玩意
         self.screen=surface
-        self.mob_rect=pygame.image.load(r'asset\mob_back.png').convert()
+        self.mob_rect=pygame.image.load(os.path.join("asset", "mob_back.png")).convert()
         self.hp_rect=None
         self.hp_slot=MySprite()
-        self.hp_slot.load(r'asset\hp_slot.png', 0, 0, 72, 500, 3)
-        self.exp_slot=pygame.image.load(r'asset\exp_slot.png').convert_alpha()
+        self.hp_slot.load(os.path.join("asset", "hp_slot.png"), 0, 0, 72, 500, 3)
+        self.exp_slot=pygame.image.load(os.path.join("asset", "exp_slot.png")).convert_alpha()
         self.item=MySprite()
-        self.item.load(r'asset\process1.png', 0, 0, 32, 32, 16)
+        self.item.load(os.path.join("asset", "process1.png"), 0, 0, 32, 32, 16)
         self.item_detail=MySprite()
-        self.item_detail.load(r'equipment\process.png', 0, 0, 128, 128, 16)
+        self.item_detail.load(os.path.join("equipment", "process.png"), 0, 0, 128, 128, 16)
         self.mob_detail=MySprite()
-        self.mob_detail.load(r'asset\mob_demo.png', 0, 0, 128, 128, 10)
+        self.mob_detail.load(os.path.join("asset", "mob_demo.png"), 0, 0, 128, 128, 10)
         self.stats=MySprite()        #状态显示
-        self.stats.load(r'asset\stat.png', 0, 0, 48, 48, 6)
+        self.stats.load(os.path.join("asset", "stat.png"), 0, 0, 48, 48, 6)
         self.ptr=None
         self.po, self.inf=None, None
         self.origin_hp=0
@@ -218,85 +218,49 @@ class Infoimage:
                 if item.enchant_lvl==6: text=self.bigf.render(t, True, (148,0,211))        #relic需要紫色的名字
                 else: text=self.bigf.render(t, True, (0,0,0))
             else: text=self.bigf.render(t, True, (0,0,0))
-            self.texts.append(text)
-            t=item.describe
-            text=self.font3.render(t, True, (0,0,0))
-            self.texts.append(text)
-            t='Attack: '+str(item.atk)
-            text=self.font3.render(t, True, (0,0,0))
-            self.texts.append(text)
-            t='Defence: '+str(item.defc)
-            text=self.font3.render(t, True, (0,0,0))
-            self.texts.append(text)
-            t='Magic: '+str(item.magic)
-            text=self.font3.render(t, True, (0,0,0))
-            self.texts.append(text)
-            t='Speed: '+str(item.speed)
-            text=self.font3.render(t, True, (0,0,0))
-            self.texts.append(text)
-            t='Weight: '+str(item.weight)+'   Price: '+str(item.price)+' g'
-            text=self.font3.render(t, True, (0,0,0))
-            self.texts.append(text)
-            lvl=item.lvl
-            if lvl != -1:
-                t='Level: '+str(lvl)
-            else:
-                t='Level: NaN'
-            text=self.font3.render(t, True, (0,0,0))
-            self.texts.append(text)
-            t='Generating Level: '+str(item.gnrt_lvl)
-            text=self.font3.render(t, True, (0,0,0))
-            self.texts.append(text)
+            self.texts.extend([
+                text,
+                self.font3.render(item.describe, True, (0,0,0)),
+                self.font3.render(f'Attack: {item.atk}', True, (0,0,0)),
+                self.font3.render(f'Defence: {item.defc}', True, (0,0,0)),
+                self.font3.render(f'Magic: {item.magic}', True, (0,0,0)),
+                self.font3.render(f'Speed: {item.speed}', True, (0,0,0)),
+                self.font3.render(f'Weight: {item.weight}   Price: {item.price} g', True, (0,0,0)),
+                self.font3.render(f'Level: {item.lvl if item.lvl != -1 else "NaN"}', True, (0,0,0)),
+                self.font3.render(f'Generating Level: {item.gnrt_lvl}', True, (0,0,0))
+            ])
             if item.energy:
-                t='Energy: '+str(item.energy)+'    Number of amount: '+str(item.count)
+                t=f'Energy: {item.energy}    Number of amount: {item.count}'
             else:
-                t='Item has no Energy /Number of amount: '+str(item.count)
-            text=self.font3.render(t, True, (0,0,0))
-            self.texts.append(text)
+                t=f'Item has no Energy /Number of amount: {item.count}'
+            self.texts.append(self.font3.render(t, True, (0,0,0)))
             for i in item.form_desc[:-1-item.form_desc[-1]]:      #准备普通装备描述
-                text=self.font3.render(i, True, (0,0,0))
-                self.texts.append(text)
+                self.texts.append(self.font3.render(i, True, (0,0,0)))
             for i in item.form_desc[-item.form_desc[-1] - 1:-1]:  # 准备lv6装备的攻击属性描述
-                text = self.font2.render(i, True, (148, 0, 211))
-                self.texts.append(text)
+                self.texts.append(self.font2.render(i, True, (148, 0, 211)))
             self.texts.append(item.form_desc[-1])
         else:
             ID=item.ID
             img=self.mob_detail.getImage(ID)
             self.texts.append(img)
-            t=item.name
-            text=self.bigf.render(t, True, (0,0,0))
-            self.texts.append(text)
-            with open(r'data\mob_desc.json', 'r') as read:
+            self.texts.append(self.bigf.render(item.name, True, (0,0,0)))
+            with open(os.path.join("data", "mob_desc.json"), 'r') as read:
                 desc=json.load(read)[str(ID)]
             for i in desc:
-                text=self.font3.render(i, True, (0,0,0))
-                self.texts.append(text)
-            t='HP: %2d/%2d'%(item.hp, item.origin_hp)
-            text=self.font3.render(t, True, (0,0,0))
-            self.texts.append(text)
-            t='Attack: '+str(item.attack)
-            text=self.font3.render(t, True, (0,0,0))
-            self.texts.append(text)
-            t='Defence: '+str(item.defence)
-            text=self.font3.render(t, True, (0,0,0))
-            self.texts.append(text)
-            t='Magic: '+str(item.magic)
-            text=self.font3.render(t, True, (0,0,0))
-            self.texts.append(text)
-            t='Speed: '+str(item.speed)
-            text=self.font3.render(t, True, (0,0,0))
-            self.texts.append(text)
-            self.texts+=self.mobDetail(item)
+                self.texts.append(self.font3.render(i, True, (0,0,0)))
+            self.texts.extend([
+                self.font3.render(f'HP: {item.hp:2d}/{item.origin_hp:2d}', True, (0,0,0)),
+                self.font3.render(f'Attack: {item.attack}', True, (0,0,0)),
+                self.font3.render(f'Defence: {item.defence}', True, (0,0,0)),
+                self.font3.render(f'Magic: {item.magic}', True, (0,0,0)),
+                self.font3.render(f'Speed: {item.speed}', True, (0,0,0))
+            ])
+            self.texts.extend(self.mobDetail(item))
 
     def mobDetail(self, mob):
         extra=[]
-        if mob.servant:
-            t = "Friendly"
-            text = self.bigf.render(t, True, (0, 100, 0))
-        else:
-            t="Hostile"
-            text = self.bigf.render(t, True, (100, 0, 0))
+        text = self.bigf.render("Friendly", True, (0, 100, 0)) if mob.servant else \
+                self.bigf.render("Hostile", True, (100, 0, 0))
         extra.append(text)
         text = self.font3.render(self.mobIntel[mob.intelligent], True, (0, 0, 0))       #获取怪物能力信息
         extra.append(text)

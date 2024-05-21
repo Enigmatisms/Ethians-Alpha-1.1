@@ -1,3 +1,4 @@
+import os
 import pygame
 
 class Compass:
@@ -32,7 +33,7 @@ class Compass:
             68:'deco2'      #可交互物品
         }
         self.judge=0
-        self.pic=pygame.image.load(r'asset\compass.png').convert_alpha()
+        self.pic=pygame.image.load(os.path.join("asset", "compass.png")).convert_alpha()
 
     def getColor(self, x):
         if x<=99:

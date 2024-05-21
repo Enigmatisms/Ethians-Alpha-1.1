@@ -18,9 +18,9 @@ class Cursors:      #游戏内光标，主要有：
         pygame.init()
         self.screen=surface
         self.font=pygame.font.Font(path, 16)
-        self.cursor_list=([pygame.image.load('asset\cursor3.png').convert_alpha(),
-                           pygame.image.load('asset\cursor2.png').convert_alpha(),
-                           pygame.image.load('asset\cursor.png').convert_alpha()])
+        self.cursor_list=([pygame.image.load(os.path.join('asset', 'cursor3.png')).convert_alpha(),
+                           pygame.image.load(os.path.join('asset', 'cursor2.png')).convert_alpha(),
+                           pygame.image.load(os.path.join('asset', 'cursor.png')).convert_alpha()])
         self.cursors=self.cursor_list[0]
         self.posx, self.posy=-1,-1
         self.xat, self.yat=(0,0)

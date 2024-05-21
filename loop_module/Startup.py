@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 #-*-coding:utf-8-*-
 
@@ -10,9 +11,9 @@ __note__="Alpha 1.0 complete time: Aug.28.2019"
 class Face:
     def __init__(self, screen):
         path=random.choice([0, 1])
-        if path: self.bk1 = pygame.image.load(r'asset\ethians1.jpg').convert()
-        else: self.bk1=pygame.image.load(r'asset\ethians2.jpg').convert()
-        self.author=pygame.image.load(r'asset\author.png').convert()
+        if path: self.bk1 = pygame.image.load(os.path.join("asset", "ethians1.jpg")).convert()
+        else: self.bk1=pygame.image.load(os.path.join("asset", "ethians2.jpg")).convert()
+        self.author=pygame.image.load(os.path.join("asset", "author.png")).convert()
         self.screen=screen
         self.surface = pygame.Surface((1200, 650))
         self.surface.fill((0, 0, 0))

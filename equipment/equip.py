@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 #-*-coding:utf-8-*-
 
@@ -11,7 +12,7 @@ from collections import deque
 class FloorEquipManage:
     def __init__(self, surface):
         self.All = MySprite()
-        self.All.load(r'asset\process1.png', 0, 0, 32, 32, 16)
+        self.All.load(os.path.join("asset", "process1.png"), 0, 0, 32, 32, 16)
         self.level=[[-1 for i in range(42)] for j in range(64)]
         self.pool={}
         self.ptr=None       #传入ptr,需要和人物的背包联系
@@ -27,7 +28,7 @@ class FloorEquipManage:
         self.eq.getInfo()
         self.ect=EnchantItem()
 
-        with open(r'equipment\equipment.json', 'r') as read:       #创建测试时可以生成的武器列表
+        with open(os.path.join("equipment", "equipment.json")) as read:       #创建测试时可以生成的武器列表
             tem=json.load(read)
             self.create=[int(k) for k in tem.keys()]
             self.gnrt_dct={int(k):v[8] for k,v in tem.items()}         #生成一个字典,内容是key为物品ID, value为物品生成等级
@@ -306,7 +307,7 @@ class Equip:
                           12: 'This will blind your eyes, makes it more vulnerable to the dark.'}
 
     def getInfo(self):
-        with open(r'equipment\equipment.json', 'r') as read:
+        with open(os.path.join("equipment", "equipment.json")) as read:
             self.items=json.load(read)
 
     def loadAttri(self, item, prefix=[]):            #从文档中获取对应装备的信息
@@ -401,11 +402,11 @@ class Equip:
     def formName(self):         #生成带词缀的名字
         if not self.name_set and self.lvl<=5:
             self.name_set=True
-            with open(r'data\attributes.json', 'r') as read:
+            with open(os.path.join("data", "attributes.json")) as read:
                 tem=json.load(read)
                 self.name=self.basic_name
                 for i in self.prefix:
-                    self.name=tem[str(i)][0]+' '+self.name
+                    self.name=f'{tem[str(i)][0]} {self.name}'
             self.priceMultiplier(tem)
         else:
             self.price=int(self.price*1.5)
@@ -460,7 +461,7 @@ class Enchant(Equip):            #weapon是近战武器
         self.attr=[]
 
     def setUpAttri(self):       #附魔时，所有属性对应加上
-        with open(r'data\attributes.json', 'r') as read:
+        with open(os.path.join("data", "attributes.json"), 'r') as read:
             tem=json.load(read)
         for i in self.prefix:
             self.atk+=tem[str(i)][1]
@@ -471,7 +472,7 @@ class Enchant(Equip):            #weapon是近战武器
                 self.weight*=2
 
     def deSetAttri(self):           #退魔时，所有属性对照减去
-        with open(r'data\attributes.json', 'r') as read:
+        with open(os.path.join("data", "attributes.json"), 'r') as read:
             tem=json.load(read)
         for i in self.prefix:
             self.atk-=tem[str(i)][1]

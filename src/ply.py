@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 #-*-coding:utf-8-*-
 import random, time
@@ -12,7 +13,7 @@ class Player:
         self.enter, self.spike_hurt=True, False
         self.posx,self.posy=(32,22)
         self.player_img=MySprite()
-        self.player_img.load(r'asset\me.png', 0, 0, 32, 32, 7)          #TBS:这个需要改动，专门的Player类将会引入，也就是说，load的图像与选择的职业有关,以后要改成可变参数
+        self.player_img.load(os.path.join("asset", "me.png"), 0, 0, 32, 32, 7)          #TBS:这个需要改动，专门的Player类将会引入，也就是说，load的图像与选择的职业有关,以后要改成可变参数
         self.player_img.first_frame, self.player_img.last_frame=0, 0        #TBS:设置图像，上一行注释提到的问题可以通过这个来解决
         self.ptr = None
         self.xat, self.yat=(0,0)

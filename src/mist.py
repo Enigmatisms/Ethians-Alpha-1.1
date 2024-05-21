@@ -1,3 +1,4 @@
+import os
 #-*-coding:utf-8-*-
 
 from src.ezplot import MySprite
@@ -7,7 +8,7 @@ class Mist:
     def __init__(self, func):    #r是照亮半径，func函数是pl，func2参数是dg
         MySprite.__init__(self)
         self.image=MySprite()
-        self.image.load(r'asset\mist.png', 0, 0, 32, 32, 3)
+        self.image.load(os.path.join("asset", "mist.png"), 0, 0, 32, 32, 3)
         self.dg=func
         self.level=[[0 for i in range(42)] for j in range(64)]     #0代表未勘探（黑色浓雾，不透明），1代表正在勘探（全透明），2代表勘探过但是不在勘探（半透明，不显示生物（这怎么写？））
         self.open_set, self.close_set = [], []

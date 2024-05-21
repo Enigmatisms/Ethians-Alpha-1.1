@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 #-*-coding:utf-8-*-
 
@@ -7,7 +8,7 @@ class NPC:      #NPC环境
     def __init__(self, func):      #传入参数为dg
         self.image=MySprite()
         self.dg=func
-        self.image.load(r'asset\npcs.png', 0, 0, 32, 32, 8)
+        self.image.load(os.path.join("asset", "npcs.png"), 0, 0, 32, 32, 8)
         #self.level=[[-1 for i in range(42)] for j in range(64)]
         self.no_stand={0, 4, 7, 8, 9, 10, 30}
         #self.no_walk={2*i for i in range(10)}

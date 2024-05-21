@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 #-*-coding:utf-8-*-
 from src.calc import Calc
@@ -24,7 +25,7 @@ class Pattr:
         self.frozen=False
         self.bleeding = False
         self.kill_dict={2*i:0 for i in range(25)}
-        self.__equips=({'Left':0, 'Right':0, 'Head':0, 'Armor':0, 'Leg':0, 'Necklace':0,
+        self.__equips=({'Left':0, 'Right':0, 'Head':0, 'Armoos.path.join(":0, ")Leg':0, 'Necklace':0,
                         'Ring':0, 'Feet':0, 'Wand':0, 'Book':0, 'Cape':0, 'Amulet':0, 'Dual':0, 'Arrow':0})      #考虑加一项Dual
         self.nowLvl=0           #每次生成地图时会对应更新
         self.cc=Calc()

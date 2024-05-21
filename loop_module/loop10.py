@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 #-*-coding:utf-8-*-
 
@@ -8,37 +9,37 @@ from src.ezplot import MySprite
 class PlayerGui:
     def __init__(self, surface, ptr):
         self.screen=surface
-        self.font1=pygame.font.Font(r'asset\fonts\verdana.ttf', 20)
-        self.font2=pygame.font.Font(r'asset\fonts\verdana.ttf', 15)
+        self.font1=pygame.font.Font(os.path.join("asset", "fonts", "verdana.ttf"), 20)
+        self.font2=pygame.font.Font(os.path.join("asset", "fonts", "verdana.ttf"), 15)
         self.mob=MySprite()
-        self.mob.load(r'asset\mobs.png', 0, 0, 32, 32, 10)
+        self.mob.load(os.path.join("asset", "mobs.png"), 0, 0, 32, 32, 10)
         self.mob_name={}
         """============按钮有关属性============="""
         self.btn=MySprite()
-        self.btn.load(r'asset\buttons_2.png', 0, 0, 96, 50, 1)
+        self.btn.load(os.path.join("asset", "buttons_2.png"), 0, 0, 96, 50, 1)
         self.btn.X, self.btn.Y=1000, 80
         self.button_word=[self.font1.render('Kills', True, (0,0,0)), self.font1.render('Back', True, (0,0,0))]
         self.rect=pygame.Rect((1000, 80, 96, 50))
         #====================================
         self.header=self.font1.render("Statistics for monsters killed", True, (0,0,0))
         self.player=MySprite()
-        self.player.load(r'asset\player.png', 0, 0, 104, 104, 3)
+        self.player.load(os.path.join("asset", "player.png"), 0, 0, 104, 104, 3)
         self.item=MySprite()
-        self.item.load(r'asset\items.png', 0, 0, 64, 64, 6)
+        self.item.load(os.path.join("asset", "items.png"), 0, 0, 64, 64, 6)
         self.bg_slot=[]
         self.equips=MySprite()
-        self.equips.load(r'asset\process.png', 0, 0, 64, 64, 16)
-        d=pygame.image.load(r'asset\warrior.png').convert()
+        self.equips.load(os.path.join("asset", "process.png"), 0, 0, 64, 64, 16)
+        d=pygame.image.load(os.path.join("asset", "warrior.png")).convert()
         self.bg_slot.append(d)
-        d=pygame.image.load(r'asset\ranger.png').convert()
+        d=pygame.image.load(os.path.join("asset", "ranger.png")).convert()
         self.bg_slot.append(d)
-        d=pygame.image.load(r'asset\wizard.png').convert()
+        d=pygame.image.load(os.path.join("asset", "wizard.png")).convert()
         self.bg_slot.append(d)
         self.ptr=ptr
         self.player_num=self.ptr.career_getter()
-        with open(r'data/eng_person_des.txt', 'r') as read:
+        with open(os.path.join("data", "eng_person_des.txt")) as read:
            total=json.load(read)
-        with open(r'data/mob_dir.json','r') as read:
+        with open(os.path.join("data", "mob_dir.json")) as read:
             dct=json.load(read)
             for v in dct.values():
                 self.mob_name[v[7]]=v[8]
@@ -50,7 +51,7 @@ class PlayerGui:
         self.texts=[]
         self.mode=0     #绘制界面模式标值（0是玩家信息，1是统计信息）
         self.killDict={}            #杀死怪物统计
-        self.str_dict={'Left':(708, 320), 'Right':(456, 320), 'Head':(540, 236), 'Armor':(540, 320), 'Leg':(540, 404), 'Necklace':(456, 236),
+        self.str_dict={'Left':(708, 320), 'Right':(456, 320), 'Head':(540, 236), 'Armoos.path.join(":(540, 320), ")Leg':(540, 404), 'Necklace':(456, 236),
                         'Ring':(456, 404), 'Feet':(624, 404), 'Wand':(708, 404), 'Cape':(624, 320), 'Amulet':(624, 236), 'Dual':0, 'Book':(708, 236)}
 
     def getInfo(self):      #获取信息

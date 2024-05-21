@@ -10,7 +10,7 @@ __date__='2019/2/19'
 
 path=os.path.join('asset', 'fonts', 'verdana.ttf')
 
-with open(r'data\prefabs.json', 'r') as r:
+with open(os.path.join('data', 'prefabs.json'), 'r') as r:
     DCT = json.load(r)
 
 class Info:
@@ -33,10 +33,10 @@ class Info:
                       1:'Utimated end is reached by this man, who grasps fate with his own hand.',
                       2:'For him, the grand meeting is postponed for the faith he had shown...'}
         self.careerPic=MySprite()
-        self.careerPic.load(r'asset\win.png', 0, 0, 600, 200, 1)
+        self.careerPic.load(os.path.join("asset", "win.png"), 0, 0, 600, 200, 1)
         self.careerPic.X, self.careerPic.Y=0, 410
-        self.deadpic=pygame.image.load(r'asset\epitaph.png').convert_alpha()
-        self.winpic=pygame.image.load(r'asset\winBk.png').convert_alpha()
+        self.deadpic=pygame.image.load(os.path.join("asset", "epitaph.png")).convert_alpha()
+        self.winpic=pygame.image.load(os.path.join("asset", "winBk.png")).convert_alpha()
         self.winList=list()
         self.epiList=list()
         self.surface = pygame.Surface((1200, 650))
@@ -62,17 +62,17 @@ class Info:
     #多重不连续参数
     def moreArg(self, key:str, args):
             if key=='hit':          #
-                text="%s is hit with %d HP."%(args[0], args[1])
+                text=f"{args[0]} is hit with {args[1]} HP."
             elif key=='mhit':           #
-                text="%s hits you with %d HP."%(args[0], args[1])
+                text=f"{args[0]} hits you with {args[1]} HP."
             elif key=="kill":           #
-                text="You have slayed %s. Exp +%d."%(args[0], args[1])
+                text=f"You have slayed {args[0]}. Exp + {args[1]}."
             elif key=="servantK":       #怪物击杀
-                text = "%s has slayed %d."%(args[0], args[1])
+                text = f"{args[0]} has slayed {args[1]}."
             elif key=="servantA":       #怪物攻击
-                text= "%s hits %s with %d HP."%(args[0], args[1], args[2])
+                text= f"{args[0]} hits {args[1]} with {args[2]} HP."
             else :      #"reach"
-                text="Now you are inside of a %s. Level: %d. Game saved."%(args[0], args[1])
+                text=f"Now you are inside of a {args[0]}. Level: {args[1]}. Game saved."
             self.textList.append(text)
             self.textMod += 1  # 表示了textList改变了几位
 

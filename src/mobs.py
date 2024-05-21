@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 #-*-coding:utf-8-*-
 
@@ -59,7 +60,7 @@ class Pool:
                      195:self.tpWand, 196:self.mapWand, 197:self.skullWand}          #怪物不良状态
         self.melee={1:self.fieryWand, 2:self.bloodDrain, 3:self.dizzyM, 4:self.knockBack, 5:self.chaosWand,
                     6:self.frozenWand, 7:self.poisonHit, 8:self.armorBreak, 9:self.penetrate, 10:self.sweap}
-        with open(r'data\mob_dir.json', 'r') as dic:
+        with open(os.path.join("data", "mob_dir.json"), 'r') as dic:
             self.md=json.load(dic)
         self.fem=None
         self.summon_dict={22:26, 40:14}
@@ -108,7 +109,7 @@ class Pool:
         num=str(n)          #注意n不是表数量，而是表ID
         '''===========图片获取============='''
         mob=self.mob(self.screen)
-        mob.load(r'asset\mobs.png', 0, 0, 32, 32, 10)
+        mob.load(os.path.join("asset", "mobs.png"), 0, 0, 32, 32, 10)
         '''===========参数传入============'''
         mob.setup_mob(*self.md[num])
         '''=========地图位置============='''
@@ -495,23 +496,6 @@ class Pool:
         self.create_mob(ID, self.arg_funcs, radius=3)
 
     """========================================================="""
-
-    """def center(self, cx, cy):
-        #x, y为center基准点
-        for y in range(4, 39):
-            for x in range(4, 61):
-                value=self.getChar(x, y)
-                mob=self.getMob(x, y, value)
-                if int(value)>=0:
-                    mob.X = (16 - cx) * 32 + 80 + x * 32
-                    mob.Y = (9 - cy) * 32 + 10 + y * 32
-                    more=random.randint(0, 1)
-                    if mob.intelligent==11: more=0
-                    mob.frame = mob.ID + more
-                    mob.last_frame = mob.frame
-                    mob.updating(0)
-                    if self.ms.getChar(x, y)==1:
-                        mob.draw(self.screen)"""
 
     def center(self, cx, cy):
         for k in self.mob_pool.keys():                  #采用非稀疏矩阵的绘制方法
