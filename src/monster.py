@@ -307,7 +307,7 @@ class Monster(MySprite):        #继承了父类MySprite
                     self.ptr.setStat(6, 80-20*self.ptr.iceR)
                     if 80 - 20 * self.ptr.iceR: self.inf.prefabTell('frozen')
                     if not self.ptr.frozen:         #只能冻住没冻住的玩家，已经冻住的玩家只会重设时间
-                        self.ptr.speed_adder(-10)
+                        self.ptr.speed_adder(-15)
                         self.ptr.frozen=True
                 elif tag==1: self.bloodSteal()          #有概率偷取生命
             # 66%概率生命偷取
@@ -318,10 +318,10 @@ class Monster(MySprite):        #继承了父类MySprite
                     self.ptr.hp_adder(-3)
             # 药剂反胃效果
             if 7 in self.tags:
-                self.inf.prefabTell('bleed')
+                self.inf.prefabTell('pointx')
                 if self.cc.fixChoice(4):        #50%
                     self.ptr.setStat(7, 50)
-                    self.ptr.bleeding=True
+                    self.ptr.potion_sick=True
 
 
     def behavior(self, attack=False, remote=False):         #不同AI等级怪物的行为

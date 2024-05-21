@@ -141,10 +141,13 @@ class Surround:                                                                 
     '''======================================================='''
     def inter_door(self, x, y, where):
         if where==0:
-            self.setChar(x, y, where+1)
-            self.inf.prefabTell('door+')
+            self.setChar(x, y, 1)
+            # 玩家有概率把门搞坏
+            door_set=random.choices([1, 2], [0.95, 0.05])[0]
+            self.setChar(x, y, door_set)
+            self.inf.prefabTell('door+' if door_set == 1 else 'doorx')
         elif where==1:
-            self.setChar(x, y, where-1)
+            self.setChar(x, y, 0)
             self.inf.prefabTell('door-')
         elif where==3:
             self.setChar(x, y, where + 1)
@@ -161,10 +164,14 @@ class Surround:                                                                 
                 self.inf.prefabTell('door!')
             
     def de_trap(self, x, y, where=None):     #完全除去陷阱（setChar参数值为-1）,主要用于下落陷阱
-        self.inf.prefabTell('trap-')
-        self.setChar(x, y, -1)
-        self.eqf.ptr.exp_adder(5)
-
+        # 60% 概率去除
+        if random.choices([0, 1], [0.4, 0.6])[0]:
+            self.inf.prefabTell('trap-')
+            self.setChar(x, y, -1)
+            self.eqf.ptr.exp_adder(5)
+        else:
+            self.inf.prefabTell('trapx')
+            self.pl.trig_trap(where)
     
     def de_trap1(self, x, y, where):        #除去陷阱1：setChar改变值只有1
         if self.getLoop()==1:   #打开陷阱箱后会被刺
@@ -174,16 +181,25 @@ class Surround:                                                                 
             self.pl.dg.fem.rangeCenter(self.pl.posx, self.pl.posy, self.pl.ptr.LR)  # TBS:luminous_range应该作为一个参数
             self.eqf.ptr.hp_adder(-2)
         else:
-            self.inf.prefabTell('trap-')
             self.setChar(x, y, 8)
             self.itemDrop((x, y), self.itemLevelNum())
             self.pl.dg.fem.rangeCenter(self.pl.posx, self.pl.posy, self.pl.ptr.LR)  # TBS:luminous_range应该作为一个参数
-            self.eqf.ptr.exp_adder(5)
+            if random.choices([0, 1], [0.25, 0.75])[0]:
+                self.inf.prefabTell('trap-')
+                self.eqf.ptr.exp_adder(5)
+            else:
+                self.inf.prefabTell('trapx')
+                self.inf.prefabTell('boxtrap')
+                self.eqf.ptr.hp_adder(-2)
 
     def de_trap2(self, x, y, where):
-        self.inf.prefabTell('trap-')
         self.setChar(x, y, where+6)
-        self.eqf.ptr.exp_adder(5)
+        if random.choices([0, 1], [0.25, 0.75])[0]:
+            self.inf.prefabTell('trap-')
+            self.eqf.ptr.exp_adder(5)
+        else:
+            self.inf.prefabTell('trapx')
+            self.pl.trig_trap(where)
 
     def inter_box(self, x, y, where):       #参数x, y应该是self.xat, self.yat
         if where==5:

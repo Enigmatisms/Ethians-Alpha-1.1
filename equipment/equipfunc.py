@@ -191,13 +191,9 @@ class EquipFunction:
         self.gui.quitSetter()
 
     def heal(self, tag):        #5:恢复生命（中）
-        if not self.ptr.bleeding:
+        if not self.ptr.potion_sick:
             hold = int(self.ptr.maxhp_getter() / 4)
             if self.ptr.hp_getter() <= hold:  # 濒死状态加成
-                judge = True
-            else:
-                judge = False
-            if judge:
                 hp = 6 + (tag - 1) * 4
                 if self.ptr.hp_getter() + hp > self.ptr.maxhp_getter():
                     self.ptr.hp_setter(self.ptr.maxhp_getter())
@@ -209,7 +205,8 @@ class EquipFunction:
                     self.ptr.hp_setter(self.ptr.maxhp_getter())
                 else:
                     self.ptr.hp_adder(hp)
-            self.ptr.setStat(7, 20)     #药剂恶心效果
+            self.potion_sick = True
+            self.ptr.setStat(7, 30)     #药剂恶心效果
             self.inf.prefabTell('potionx')
             self.inf.prefabTell('cure', back=hp)
         else:
@@ -222,6 +219,8 @@ class EquipFunction:
         self.inf.prefabTell('poison-')
         self.ptr.setStat(1, 0)
         self.heal(1)
+        self.gui.quitSetter()
+        self.gui.quitSetter()
 
     def strength(self):         #9：强壮药剂
         self.inf.prefabTell('atk+', back=1)
@@ -313,7 +312,6 @@ class EquipFunction:
             self.ptr.exp_setter(self.ptr.need_getter() + diff)
             self.inf.prefabTell('no')
 
-
     def locker(self):       #20:锁
         lst=[]
         for i in range(-1, 2):
@@ -326,21 +324,3 @@ class EquipFunction:
                 self.inf.prefabTell('&door')
         self.gui.quitSetter()
         self.gui.quitSetter()
-
-
-
-            
-    
-        
-        
-            
-            
-            
-            
-            
-    
-
-
-
-        
-

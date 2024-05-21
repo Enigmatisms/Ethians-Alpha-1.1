@@ -93,7 +93,7 @@ class Player:
         self.dg.sur.setChar(self.posx-1, self.posy-1, -1)
         self.inf.prefabTell('tp')
         self.trap_reset_pos()           #踩到传送陷阱是被在本层内传送了
-        self.ms.reset_mist()
+        # self.ms.reset_mist()
 
     def trig_summon(self):      #TBS:   踩到召唤怪物陷阱就会召唤怪物
         self.dg.sur.setChar(self.posx-1 , self.posy-1, -1)
@@ -228,7 +228,7 @@ class Player:
         judge1=self.dg.getChar(x-1, y-1)
         judge2=self.dg.sur.getChar(x-1, y-1)
         judge3=self.dg.po.getChar(x-1, y-1)
-        while not judge1 in self. dgNoTp or judge2 in self.surNoTp or judge3:
+        while not judge1 in self.dgNoTp or judge2 in self.surNoTp or judge3:
             x, y=random.randint(5, 58), random.randint(5, 38)
             judge1=self.dg.getChar(x-1, y-1)
             judge2=self.dg.sur.getChar(x-1, y-1)

@@ -23,7 +23,7 @@ class Pattr:
         self.LR=6       #光照范围
         self.blind=False
         self.frozen=False
-        self.bleeding = False
+        self.potion_sick = False
         self.kill_dict={2*i:0 for i in range(25)}
         self.__equips=({'Left':0, 'Right':0, 'Head':0, 'Armoos.path.join(":0, ")Leg':0, 'Necklace':0,
                         'Ring':0, 'Feet':0, 'Wand':0, 'Book':0, 'Cape':0, 'Amulet':0, 'Dual':0, 'Arrow':0})      #考虑加一项Dual
@@ -539,7 +539,8 @@ class Pattr:
             return 0
         if self.__stat[1]<=-1:
             self.__stat[1]-=1
-        if self.__stat[1]==-13:
+        if self.__stat[1]== -7 - self.poisonR:      # 表示了中毒的 __stat[1] 时间
+            # 每当 self.__stat[1] 量表为 -9 - self.poisonR 时，发生一次中毒扣血
             self.__stat[1]=-1
             possi=[0.25*self.poisonR, 0.25*(4-self.poisonR)]
             judge=random.choices([0, 1], possi)[0]
@@ -582,16 +583,16 @@ class Pattr:
             self.__stat[6] -= 1
         elif self.__stat[6] == 1:
             self.__stat[6] -= 1
-            self.__speed += 10
+            self.__speed += 15
             self.frozen = False
         return 0
 
     def stat7(self):        #流血效果：药物使用无效（不致死）
-        if self.__stat[7] and self.__stat[7] > 1:
+        if self.__stat[7] > 1:
             self.__stat[7] -= 1
         elif self.__stat[7] == 1:
             self.__stat[7] -= 1
-            self.bleeding = False
+            self.potion_sick = False
         return 0
 
     def bloodDrain(self, x=0, y=0, tag=0):       #从怪物处吸血,tag=1是治疗卷轴或法杖
@@ -699,7 +700,7 @@ class Pattr:
         self.LR = 6  # 光照范围
         self.blind = False
         self.frozen = False
-        self.bleeding = False
+        self.potion_sick = False
         self.kill_dict={2*i:0 for i in range(25)}
         self.__equips = ({'Left': 0, 'Right': 0, 'Head': 0, 'Armor': 0, 'Leg': 0, 'Necklace': 0,
                           'Ring': 0, 'Feet': 0, 'Wand': 0, 'Book': 0, 'Cape': 0, 'Amulet': 0, 'Dual': 0,

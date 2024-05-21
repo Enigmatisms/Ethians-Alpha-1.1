@@ -25,6 +25,7 @@ dct['gate+']="You raise the gate."              #
 dct['gate-']="You shut down the gate."              #
 dct['atgate']="You are standing in the gate."           #
 dct['trap-']="You eliminate the trap. Exp +5"              #
+dct['trapx']="Failed to eliminate the trap."           #
 dct['boxtrap']="You have triggered a spike trap."           #
 dct['bless']="Blessed by Lord Enigma I, you feel energetic."
 dct['bless-']="You are out of health to make a pray to the Lord."
@@ -101,7 +102,7 @@ dct['deq']="You take down "             #
 dct['berserker']="Berserker can not use "
 dct['archer']="Archer can not use "
 dct['sorcerer']="Sorcerer can not use "
-dct['potionx']="No potion in take in 20 steps for potion sickness."
+dct['potionx']="No potion in take in 30 steps for potion sickness."
 #模式信息触发：
 dct['cursor']="You open up infomation cursor, select a target."         #
 dct['attack']="You are using attacking mode, select a target."          #

@@ -51,7 +51,7 @@ class PlayerGui:
         self.texts=[]
         self.mode=0     #绘制界面模式标值（0是玩家信息，1是统计信息）
         self.killDict={}            #杀死怪物统计
-        self.str_dict={'Left':(708, 320), 'Right':(456, 320), 'Head':(540, 236), 'Armoos.path.join(":(540, 320), ")Leg':(540, 404), 'Necklace':(456, 236),
+        self.str_dict={'Left':(708, 320), 'Right':(456, 320), 'Head':(540, 236), 'Armor':(540, 320), 'Leg':(540, 404), 'Necklace':(456, 236),
                         'Ring':(456, 404), 'Feet':(624, 404), 'Wand':(708, 404), 'Cape':(624, 320), 'Amulet':(624, 236), 'Dual':0, 'Book':(708, 236)}
 
     def getInfo(self):      #获取信息
