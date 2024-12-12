@@ -8,44 +8,62 @@ My own Rougelike game during the first year of university. This project is curre
 
 A Rougelike game, in the hope of implement some of my own ideas. About the origin version of this project, search `Dweller`.
 
-`asset`文件夹中部分图片来源与`Dweller`这个游戏，包括所有monster, 部分items, 其余都是个人使用PS进行的创作：
+Some of the images in the `asset` folder are sourced from the game *Dweller*, including all the monsters and some items. The rest were created by me using Photoshop.
 
-* 2019年一月开始断断续续写这个项目，知道2019年8月29日写完
-* 在上完数据结构与算法后，对这个项目进行了一些优化，但是很有限，这个项目的代码结构太乱，类间的调用关系不清晰，可维护性很差，所以我称之为“练手项目”
-* 对于这个游戏，以后有时间可能进行重构（甚至重写），里面太多的实现在我现在看来都是垃圾。
-* 个人不想再使用Pygame做这个项目，Pygame没有很好的交互系统，只能自己写交互，有点难受。如果需要重构，预计使用C#实现，可以省去GUI、动画、交互以及并行程序的开发
+I started working on this project intermittently in January 2019 and finished it on August 29, 2019. After completing the data structures and algorithms course, I made some optimizations to the project, but they were very limited. The code structure of this project is too messy, with unclear relationships between classes, making it hard to maintain. That's why I call it a **practice project.**
+As for this game, I might consider refactoring (or even rewriting) it when I have time in the future. There are too many implementations in it that, from my current perspective, are garbage.
+Personally, I no longer want to use Pygame for this project. Pygame lacks a good interaction system, so I had to implement interactions myself, which is a bit uncomfortable. If I do decide to refactor it, I plan to use C# to streamline the development of the GUI, animations, interactions, and parallel programming.
+
+##### Loading the game and resume from the saved check-point
+
+https://github.com/user-attachments/assets/16167dc8-70ec-4a80-8575-989047c009a3
+
+##### Explore... and die (will be recorded in the Valhalla)
+
+
+
+https://github.com/user-attachments/assets/a02e9d06-b4ae-4b0c-a8b1-dc8e1c3de479
+
 
 ---
 
-## II. Attributes
+## II. Gameplay
 
-### 2.1 随机生成的地图
+### 2.1 Randomly Generated Maps
 
-- 地牢随机生成，并且附带地图编辑器，可以自定义地图。
-- 陷阱，宝箱，怪物，地形丰富
-- FOV shadow casting 迷雾算法，小地图显示
+- The dungeon is randomly generated and includes a map editor for custom map creation.
+- Traps, treasure chests, monsters, and terrain are rich and varied.
+- FOV shadow casting for fog of war algorithm, with a mini-map display.
 
 ![](README/1.png)
 
-### 2.2 装备\背包系统
+### 2.2 Equipment & Inventory System
 
-- 装备等级与词缀加成
-- 附魔升级以及随机名字 + 随机属性
-- 装备掉落系统
-- 人物属性、抗性系统，游戏信息记录
-- 三个职业：狂战士，游侠，巫师
-- 人物等级系统，商店交易系统，可与NPC进行对话
+- Equipment levels and affix bonuses.
+- Enchantment upgrades with random names and attributes.
+- Equipment drop system.
+- Character attributes, resistances, and game information tracking.
+- Three classes: Berserker, Ranger, Wizard.
+- Character level system, shop trading system, and NPC dialogue.
 
 ![](README/3.png)
 
 ![](README/2.png)
 
-### 2.3 主菜单与彩蛋
+### 2.3 Simple AI
 
-- 游戏编写者的彩蛋世界，内有编写者的家人
-- 英灵殿：记录死亡信息，记录通关信息
-- 支持游戏保存
-- 支持进行键盘设置
+- The AI that controls mobs has a intelligence level.
+- All the hostile mobs will chase you if you are perceived by them (an efficient A*).
+- Some of the smart mobs will flee if they are low on HP.
+- Some might cast spells on you or teleport themselves when hit.
+- Some might break through the door like FBI agents, even if you shut the door.
+
+### 2.4 Main Menu & Easter Eggs
+
+- An Easter egg world created by the game developers, featuring the developer's family.
+- Valhalla: Records death information and completion details.
+- Supports game saving.
+- Supports keyboard customization.
 
 ![](README/5.png)
 
@@ -55,7 +73,7 @@ A Rougelike game, in the hope of implement some of my own ideas. About the origi
 
 ## III. Play
 
-​		应该只依赖于Pygame库（Pygame 1.9.6），Windows / Ubuntu均可
+​		Only depends on Pygame (Pygame 1.9.6 and 2.5.2 are tested), for both Windows and Ubuntu
 
 ```
 python ./main.py
